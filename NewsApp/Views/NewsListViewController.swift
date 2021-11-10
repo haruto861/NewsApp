@@ -28,9 +28,7 @@ final class NewsListViewController: UIViewController {
     }
 
     private func fetchNewsArticels() {
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=[API_KEY]") else { return }
-        let request = Resource<NewsArticlesList>(url: url)
-        URLRequest.fetch(resource: request)
+        URLRequest.fetch(resource: NewsArticlesList.all)
             .subscribe(onNext: { [weak self] res in
                 if let results = res {
                     self?.articels = results.articles

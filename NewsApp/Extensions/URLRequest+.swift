@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-// urlはcodableに準拠している
 struct Resource<T: Codable> {
     let url: URL
 }
