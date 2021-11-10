@@ -93,12 +93,10 @@
 				F1B4210C273BAA60009C277A /* ViewModels */,
 				F14A7FA6273B902F009AFEE8 /* Views */,
 				F14A7F9D273B7554009AFEE8 /* Models */,
+				F1B4210F273BBB66009C277A /* Others */,
 				F14A7FA5273B8D1C009AFEE8 /* Extensions */,
-				F14A7F85273ABB2F009AFEE8 /* AppDelegate.swift */,
-				F14A7F87273ABB2F009AFEE8 /* SceneDelegate.swift */,
 				F14A7F8E273ABB31009AFEE8 /* Assets.xcassets */,
 				F14A7F90273ABB31009AFEE8 /* LaunchScreen.storyboard */,
-				F14A7F93273ABB31009AFEE8 /* Info.plist */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -136,6 +134,16 @@
 				F1B4210D273BB231009C277A /* NewsArticleViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F1B4210F273BBB66009C277A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				F14A7F85273ABB2F009AFEE8 /* AppDelegate.swift */,
+				F14A7F87273ABB2F009AFEE8 /* SceneDelegate.swift */,
+				F14A7F93273ABB31009AFEE8 /* Info.plist */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
