@@ -9,8 +9,8 @@ import UIKit
 
  class NewsListTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
 
     static var className: String {
         return String(describing: self)

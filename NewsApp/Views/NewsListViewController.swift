@@ -19,6 +19,7 @@ final class NewsListViewController: UIViewController {
         }
     }
     private let disposeBag = DisposeBag()
+    private var articleListVM: NewsArticleListViewModel!
     private var articels = [NewsArticles]()
 
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ final class NewsListViewController: UIViewController {
         URLRequest.fetch(resource: NewsArticlesList.all)
             .subscribe(onNext: { [weak self] res in
                 if let results = res {
-                    self?.articels = results.articles
+                    self?.articleListVM = NewsArticleListViewModel(results.articles)
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                     }
@@ -46,12 +47,17 @@ extension NewsListViewController: UITableViewDelegate {
 
 extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articels.count
+        return self.articleListVM == nil ? 0 : self.articleListVM.aritclesVM.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsListTableViewCell.idetifier, for: indexPath) as! NewsListTableViewCell
-        cell.configure(articels: self.articels[indexPath.row])
+
+        let articleVM = self.articleListVM.articleAt(indexPath.row)
+        articleVM.title.asDriver(onErrorJustReturn: "")
+            .drive(cell.titleLabel.rx.text).disposed(by: disposeBag)
+        articleVM.description.asDriver(onErrorJustReturn: "")
+            .drive(cell.descriptionLabel.rx.text).disposed(by: disposeBag)
         return cell
     }
 }
