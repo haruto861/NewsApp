@@ -13,7 +13,7 @@ struct NewsArticlesList: Codable{
 
 struct NewsArticles: Codable {
     let title: String
-    let description: String
+    let description: String?
 }
 
 extension NewsArticlesList {
