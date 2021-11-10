@@ -29,20 +29,16 @@ final class NewsListViewController: UIViewController {
 
     private func fetchNewsArticels() {
         guard let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=[API_KEY]") else { return }
-
-        Observable.just(url).flatMap { url -> Observable<Data> in
-            let request = URLRequest(url: url)
-            return URLSession.shared.rx.data(request: request)
-        }.map { data -> [NewsArticles]? in
-            return try? JSONDecoder().decode(NewsArticlesList.self, from: data).articles
-        }.subscribe(onNext: { articles in
-            if let articles = articles {
-                self.articels = articles
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        let request = Resource<NewsArticlesList>(url: url)
+        URLRequest.fetch(resource: request)
+            .subscribe(onNext: { [weak self] res in
+                if let results = res {
+                    self?.articels = results.articles
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
                 }
-            }
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 }
 
